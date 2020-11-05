@@ -1,0 +1,3 @@
+﻿  HangMan.cpp
+D:\GameProgramProject\HangMan\HangMan\HangMan.cpp(48,22): warning C4018: “<”: 有符号/无符号不匹配
+  HangMan.vcxproj -> D:\GameProgramProject\HangMan\Debug\HangMan.exe
