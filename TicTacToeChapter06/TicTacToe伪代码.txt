@@ -1,0 +1,26 @@
+创建一个空的井字板
+显示游戏说明（操作方法）
+决定谁先走
+while 没人胜出 && 不是平局
+	if 现在是人类的回合
+		获取人类的移动
+		将人类的移动同步跟新
+	else
+		计算计算机的移动
+		同步更新计算机的移动
+	显示井字板
+	交换回合
+恭喜获胜者或者宣布平局
+
+函数														描述
+void instructions()											显示游戏操作指南。参数：无。返回：无。
+char askYesNo(string question)								询问是否。参数：一个问题。返回：‘y’或‘n’。
+int askNumber(string question, int high, int low = 0)		询问一定范围的数字。参数：问题，上限，下限。返回：上下限之间的数字。
+char humanPiece()											确定玩家的棋子。参数：无。返回：‘X’或‘O’。
+char opponent(char piece)									确定对立棋子。参数：‘X’或‘O’。返回：‘X’或‘O’。
+void displayBoard(const vector<char>& board)				在屏幕上显示棋盘。参数：棋盘。返回：无。
+char winner(const vector<char>& board)						确定游戏胜利者。参数：棋盘。返回：‘X’，‘O’，‘T’平局，‘N’未胜出。
+bool isLegal(const vector<char>& board, int move)			确定一招棋的合法性。参数：棋盘，一招棋。返回：‘true’，‘false’。
+int humanMove(const vector<char>& borad, char human)		获取玩家一招棋。参数：棋盘，玩家的棋子。返回：一招棋。
+int computerMove(vector<char>& borad, char computer)			计算计算机的一招棋。参数：棋盘，计算机的棋子。返回：一招棋。
+void announceWinner(char winner, char computer, char human)	恭喜胜者或者宣布和局。参数：胜出棋子，计算机棋子，人类棋子。返回：无。
