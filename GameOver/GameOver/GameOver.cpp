@@ -5,10 +5,27 @@
 // A first C++ program
 
 #include <iostream>
+#include <string>
+using namespace std;
 
 int main()
 {
-	std::cout << "Game Over!" << std::endl;
+	string words = "ABCDEFG";
+	string* pWords = &words;
+	string** pPWords = &pWords;
+	cout << pWords->size() << endl;
+	cout << (*pPWords)->size() << endl;
+	cout << endl;
+
+	int a = 10;
+	int& rA = a;
+	int* pRA = &rA;
+	cout << &a << endl;
+	cout << &rA << endl;
+	cout << &(*pRA) << endl;
+	cout << endl;
+
+	cout << "Game Over!" << endl;
 	return 0;
 }
 
