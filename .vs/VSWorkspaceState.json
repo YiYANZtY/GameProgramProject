@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\GameOver",
+    "\\GameOver\\GameOver",
     "\\HangMan"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\GameOver\\GameOver\\GameOver.cpp",
   "PreviewInSolutionExplorer": false
 }
