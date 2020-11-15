@@ -20,11 +20,11 @@ char askYesNo(string question);
 int askNumber(string question, int high, int low = 0);
 char humanPiece();
 char opponent(char piece);
-void displayBoard(const vector<string>& board);
-char winner(const vector<string>& board);
-bool isLegal(const vector<string>& board, int move);
-int humanMove(const vector<string>& board, char human);
-int computerMove(vector<string>& board, char computer);
+void displayBoard(const vector<char>& board);
+char winner(const vector<char>& board);
+bool isLegal(const vector<char>& board, int move);
+int humanMove(const vector<char>& board, char human);
+int computerMove(vector<char> board, char computer);
 void announceWinner(char winner, char computer, char human);
 
 int main()
@@ -79,14 +79,14 @@ char askYesNo(string question)
 	return response;
 }
 
-int askNumber(string question, int high, int low = 0)
+int askNumber(string question, int high, int low)
 {
 	int number;
 	do
 	{
 		cout << question << " (" << low << " - " << high << "): ";
 		cin >> number;
-	} while (number >= high || number <= low);
+	} while (number > high || number < low);
 	return number;
 }
 
@@ -117,11 +117,127 @@ char opponent(char piece)
 	}
 }
 
-void displayBoard(const vector<string>& board)
+void displayBoard(const vector<char>& board)
 {
 	cout << "\n\t" << board[0] << " | " << board[1] << " | " << board[2];
 	cout << "\n\t" << "---------";
 	cout << "\n\t" << board[3] << " | " << board[4] << " | " << board[5];
 	cout << "\n\t" << "---------";
 	cout << "\n\t" << board[6] << " | " << board[7] << " | " << board[8] << endl;
+}
+
+char winner(const vector<char>& board)
+{
+	const int WINNING_ROWS[8][3] = { {0, 1, 2},
+									 {3, 4, 5},
+									 {6, 7, 8},
+									 {0, 3, 6},
+									 {1, 4, 7},
+									 {2, 5, 8},
+									 {0, 4, 8},
+									 {2, 4, 6} };
+	const int TOTAL_ROWS = 8;
+	for (int row = 0; row < TOTAL_ROWS; row++)
+	{
+		if ( (board[WINNING_ROWS[row][0]] != EMPTY) &&
+			 (board[WINNING_ROWS[row][0]] == board[WINNING_ROWS[row][1]]) &&
+			 (board[WINNING_ROWS[row][0]] == board[WINNING_ROWS[row][2]]) )
+		{
+			return board[WINNING_ROWS[row][0]];
+		}
+		if (count(board.begin(), board.end(), EMPTY) == 0)
+		{
+			return TIE;
+		}
+	}
+	return NO_ONE;
+}
+
+inline bool isLegal(const vector<char>& board, int move)
+{
+	return (board[move] == EMPTY);
+}
+
+int humanMove(const vector<char>& board, char human)
+{
+	int move = askNumber("输入你想落子的地方：", (board.size() - 1));
+	while (!isLegal(board, move))
+	{
+		cout << "\n傻逼那里已经有子了。\n";
+		move = askNumber("输入你想落子的地方：", (board.size() - 1));
+	}
+	return move;
+}
+
+int computerMove(vector<char> board, char computer)
+{
+	unsigned int move = 0;//why unsigned int
+	bool found = false;
+	//if computer can win on next move, that's the move to make
+	while (!found && move < board.size())
+	{
+		if (isLegal(board, move))
+		{
+			board[move] = computer;
+			found = winner(board) == computer;
+			board[move] = EMPTY;
+		}
+		if (!found)
+		{
+			move++;
+		}
+	}
+	//otherwise, if human can win on next move, that's the move to make
+	if (!found)
+	{
+		move = 0;
+		char human = opponent(computer);
+		while (!found && move < board.size())
+		{
+			if (isLegal(board, move))
+			{
+				board[move] = human;
+				found = winner(board) == human;
+				board[move] = EMPTY;
+			}
+			if (!found)
+			{
+				move++;
+			}
+		}
+	}
+	//otherwise, moving to the best open square is the move to make
+	if (!found)
+	{
+		move = 0;
+		unsigned int i = 0;
+		const int BEST_MOVES[] = { 4, 0, 2, 6, 8, 1, 3, 5, 7 };
+		while (!found && i < board.size())
+		{
+			move = BEST_MOVES[i];
+			if (isLegal(board, move))
+			{
+				found = true;
+			}
+			++i;
+		}
+	}
+	cout << "我走这一步：" << move << endl;
+	return move;
+}
+
+void announceWinner(char winner, char computer, char human)
+{
+	if (winner == computer)
+	{
+		cout << "我赢了，你是无法击败AI的！\n";
+	}
+	else if (winner == human)
+	{
+		cout << "你赢了。不可能！一定是你欺骗了我，我发誓没有下次了，人类。\n";
+	}
+	else
+	{
+		cout << "幸运的人类，你知道赢不了我的，这是最好的结果了。\n";
+	}
 }

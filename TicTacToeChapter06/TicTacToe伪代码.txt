@@ -22,5 +22,5 @@ void displayBoard(const vector<char>& board)				在屏幕上显示棋盘。参�
 char winner(const vector<char>& board)						确定游戏胜利者。参数：棋盘。返回：‘X’，‘O’，‘T’平局，‘N’未胜出。
 bool isLegal(const vector<char>& board, int move)			确定一招棋的合法性。参数：棋盘，一招棋。返回：‘true’，‘false’。
 int humanMove(const vector<char>& borad, char human)		获取玩家一招棋。参数：棋盘，玩家的棋子。返回：一招棋。
-int computerMove(vector<char>& borad, char computer)			计算计算机的一招棋。参数：棋盘，计算机的棋子。返回：一招棋。
+int computerMove(vector<char> borad, char computer)			计算计算机的一招棋。参数：棋盘，计算机的棋子。返回：一招棋。
 void announceWinner(char winner, char computer, char human)	恭喜胜者或者宣布和局。参数：胜出棋子，计算机棋子，人类棋子。返回：无。
