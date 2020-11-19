@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\bcpp-4th-source",
+    "\\bcpp-4th-source\\chapter 09",
     "\\GameOver",
     "\\GameOver\\GameOver",
     "\\HangMan"
   ],
-  "SelectedNode": "\\GameOver\\GameOver\\GameOver.cpp",
+  "SelectedNode": "\\bcpp-4th-source\\chapter 09\\heap_data_member.cpp",
   "PreviewInSolutionExplorer": false
 }
