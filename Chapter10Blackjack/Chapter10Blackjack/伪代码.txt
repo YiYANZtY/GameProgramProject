@@ -1,0 +1,18 @@
+Deal players and the house two initial cards
+Hide the house's first card
+Display players' and house's hands
+Deal additional cards to players
+Reveal house' first card
+Deal additional cards to house
+If house is busted
+	Everyone who is not busted wins
+Otherwise
+	For each player
+		If player isn't busted
+			If player's total is greater than the house's total
+				Player wins
+			Else if player's total is less than house's total
+				Player loses
+			Else
+				Player pushes
+Remove everyone's cards
